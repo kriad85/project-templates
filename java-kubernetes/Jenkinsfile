@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'project_name', description: 'The name of the project to be created')
+        string(name: 'git_repo_name', description: 'The name of the git repo to be used')
+        string(name: 'git_user', description: 'The name of the username for the git repo')
+        string(name: 'git_password', description: 'The name of the password for the git repo')
+        string(name: 'jenkins_job_name', description: 'The name of the jenkins job')
+        string(name: 'jenkins_job_parameters', description: 'The parameters for the jenkins job seperated by commas')
+    }
+    stages {
+        stage('Setup Project Name') {
+            
+        }
+        stage('Setup Git Repository') {
+            
+        }
+        stage('Setup Jenkins Job') {
+            
+        }
+    }
+}
