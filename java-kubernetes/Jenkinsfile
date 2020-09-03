@@ -9,12 +9,6 @@ pipeline {
         string(name: 'jenkins_job_parameters', description: 'The parameters for the jenkins job seperated by commas')
     }
     stages {
-        stage('Setup Project Name') {
-            
-        }
-        stage('Setup Git Repository') {
-            
-        }
         stage('Setup Jenkins Job') {
                pipelineJob('DSL_Pipeline') {
 
