@@ -21,19 +21,25 @@ pipeline {
         }
         stage('Setup Git Repository') {
            steps {
-              sh 'curl -u $git_user:$git_password https://api.github.com/user/repos -d {\\\\\\"name\\\\\\":\\\\\\"$app_name\\\\\\"}'
-              sh 'git config --global user.email "$git_email"'
-              sh 'git config --global user.name "$git_user"'
-              sh 'echo "# $app_name" >> README.md'
-              sh 'git init'
-              sh 'git add README.md'
-              sh 'git add java-kubernetes/app'
-              sh 'git add java-kubernetes/deploy'
-              sh 'git add java-kubernetes/infra'
-              sh 'git add java-kubernetes/jenkins'
-              sh 'git commit -m "add of project"'
-              sh 'git remote set-url origin https://$git_user:$git_password@github.com/kriad85/$app_name.git'
-              sh 'git push origin master'
+              dir("java-kubernetes"){
+                 sh 'chmod +x create_repo.sh'
+                 sh 'sed -i "s/@git_user@/$git_user/g" create_repo.sh'
+                 sh 'sed -i "s/@git_password@/$git_password/g" create_repo.sh'
+                 sh 'sed -i "s/@app_name@/$app_name/g" create_repo.sh'
+                 sh './create_repo.sh'
+                 sh 'git config --global user.email "$git_email"'
+                 sh 'git config --global user.name "$git_user"'
+                 sh 'echo "# $app_name" >> README.md'
+                 sh 'git init'
+                 sh 'git add README.md'
+                 sh 'git add app'
+                 sh 'git add deploy'
+                 sh 'git add infra'
+                 sh 'git add jenkins'
+                 sh 'git commit -m "add of project"'
+                 sh 'git remote set-url origin https://$git_user:$git_password@github.com/kriad85/$app_name.git'
+                 sh 'git push origin master'
+              }
            }
         }
     }
