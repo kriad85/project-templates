@@ -32,7 +32,7 @@ pipeline {
               sh 'git add java-kubernetes/infra'
               sh 'git add java-kubernetes/jenkins'
               sh 'git commit -m "add of project"'
-              sh 'git remote add origin https://$git-user:$git_password@github.com/kriad85/$app_name.git'
+              sh 'git remote add origin https://$git_user:$git_password@github.com/kriad85/$app_name.git'
               sh 'git push origin master'
            }
         }
