@@ -21,6 +21,7 @@ pipeline {
         stage('Setup Git Repository') {
            steps {
               sh 'curl -u "$git_user:$git_password" https://api.github.com/user/repos -d "{\"name\":\"$app_name\"}"'
+              sh 'git config --global user.name "$git_user"'
               sh 'echo "# $app_name" >> README.md'
               sh 'git init'
               sh 'git add README.md'
