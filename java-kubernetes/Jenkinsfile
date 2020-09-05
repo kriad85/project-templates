@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Setup Jenkins Job') {
            steps {
-               build job: 'Seed_JOB', parameters: [[$class: 'StringParameterValue', name: 'job', value: "${params.jenkins_job_name}"],[$class: 'StringParameterValue', name: 'job_parameters', value: "${params.jenkins_job_parameters}"]], propagate: true	
+               build job: 'Seed_JOB', parameters: [[$class: 'StringParameterValue', name: 'repo_name', value: "https://${params.git_user}:${params.git_password}@github.com/kriad85/${params.app_name}.git"],[$class: 'StringParameterValue', name: 'job', value: "${params.jenkins_job_name}"],[$class: 'StringParameterValue', name: 'job_parameters', value: "${params.jenkins_job_parameters}"]], propagate: true	
            }
         }
     }
