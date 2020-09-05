@@ -12,7 +12,7 @@ pipeline {
         stage('Setup App Name') {
             steps {
                dir("app"){
-                  sh 'ls'
+                  sh 'cd java-kubernetes/app'
                   sh 'sed -i "s/@app_name@/$app_name/g" pom.xml'
                }
                dir("deploy"){
