@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         string(name: 'app_name', description: 'The name of the app to be created')
-        string(name: 'git_repo_name', description: 'The name of the git repo to be used')
         string(name: 'git_user', description: 'The name of the username for the git repo')
         string(name: 'git_password', description: 'The name of the password for the git repo')
         string(name: 'jenkins_job_name', description: 'The name of the jenkins job')
@@ -18,6 +17,21 @@ pipeline {
                   sh 'sed -i "s/@app_name@/$app_name/g" app.json'
                }
             }
+        }
+        stage('Setup Git Repository') {
+           steps {
+              sh 'curl -u '$git_user:$git_password' https://api.github.com/user/repos -d "{\"name\":\"$app_name\"}"'
+              sh 'echo "# $app_name" >> README.md'
+              sh 'git init'
+              sh 'git add README.md'
+              sh 'git add java-kubernetes/app'
+              sh 'git add java-kubernetes/deploy'
+              sh 'git add java-kubernetes/infra'
+              sh 'git add java-kubernetes/jenkins'
+              sh 'git commit -m "add of project"'
+              sh 'git remote add origin https://$git-user:$git_password@github.com/kriad85/$app_name.git'
+              sh 'git push origin master'
+           }
         }
     }
 }
