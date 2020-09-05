@@ -15,7 +15,7 @@ pipeline {
                   sh 'sed -i "s/@app_name@/$app_name/g" pom.xml'
                }
                dir("java-kubernetes/deploy/config"){
-                  sh 'sed -i "s/@app_name@/$app_name/g" config.json'
+                  sh 'sed -i "s/@app_name@/$app_name/g" app.json'
                }
             }
         }
