@@ -12,11 +12,11 @@ pipeline {
         stage('Setup App Name') {
             steps {
                dir("app"){
-                  sh 'sed -i 's/@app_name@/$app_name/g' pom.xml'
+                  sh 'sed -i "s/@app_name@/$app_name/g" pom.xml'
                }
                dir("deploy"){
                   sh 'cd config'
-                  sh 'sed -i 's/@app_name@/$app_name/g' config.json'
+                  sh 'sed -i "s/@app_name@/$app_name/g" config.json'
                }
             }
         }
