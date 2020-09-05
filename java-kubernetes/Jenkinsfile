@@ -21,10 +21,14 @@ pipeline {
             }
         }
         stage('Setup Git Repository') {
-            
+           steps {
+
+           }
         }
         stage('Setup Jenkins Job') {
-           
+           steps {
+
+           }
         }
     }
 }
