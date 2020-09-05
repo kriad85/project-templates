@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Setup Jenkins Job') {
            steps {
-               build job: 'Seed_JOB', parameters: [string(name: 'job', value:'$jenkins_job_name')], wait: false
+               build job: 'Seed_JOB', parameters: [string(name: 'job', value: $jenkins_job_name)], wait: false
            }
         }
     }
