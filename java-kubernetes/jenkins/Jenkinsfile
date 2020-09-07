@@ -27,8 +27,8 @@ pipeline {
         stage('Generate Infra') {
             steps {
                 dir("infra") {
-                   sh 'sh 'sed -i "s/@vpc_id@/$vpc_id/g" terraform.tfvars'
-                   sh 'sh 'sed -i "s/@subnet_id@/$subnet_id/g" terraform.tfvars'
+                   sh 'sed -i "s/@vpc_id@/$vpc_id/g" terraform.tfvars'
+                   sh 'sed -i "s/@subnet_id@/$subnet_id/g" terraform.tfvars'
                    sh 'terraform init'
                    sh 'terraform plan -var="cluster_name=$cluster_name" -var="ibmcloud_api_key=$api_key"'
                    sh 'terraform apply -auto-approve -var="cluster_name=$cluster_name" -var="ibmcloud_api_key=$api_key"'
