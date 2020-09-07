@@ -2,6 +2,10 @@ pipeline {
     agent any
     parameters {
         string(name: 'app_name', description: 'The name of the app to be created')
+        string(name: 'app_port', description: 'The port of the app to be exposed')
+        string(name: 'replica_number', description: 'The port of the app to be exposed')
+        string(name: 'image_registry', description: 'The port of the app to be exposed')
+        string(name: 'service_type', description: 'The type of the service to be exposed')
         string(name: 'git_email', description: 'The email for the git repo')
         string(name: 'git_user', description: 'The name of the username for the git repo')
         string(name: 'git_password', description: 'The name of the password for the git repo')
@@ -9,13 +13,24 @@ pipeline {
         string(name: 'jenkins_job_parameters', description: 'The parameters for the jenkins job seperated by commas')
     }
     stages {
-        stage('Setup App Name') {
+        stage('Setup Application Parameters') {
             steps {
                dir("java-kubernetes/app"){
                   sh 'sed -i "s/@app_name@/$app_name/g" pom.xml'
                }
+               dir("java-kubernetes/app/src/main/resources"){
+                  sh 'sed -i "s/@app_port@/$app_port/g" application.properties'
+               }
                dir("java-kubernetes/deploy/config"){
                   sh 'sed -i "s/@app_name@/$app_name/g" app.json'
+                  sh 'sed -i "s/@deployment_name@/$app_name-deployment/g" app.json'
+                  sh 'sed -i "s/@replica_number@/$replica_number/g" app.json'
+                  sh 'sed -i "s/@build_number@/1/g" app.json'
+                  sh 'sed -i "s/@container_port@/$app_port$/g" app.json'
+                  sh 'sed -i "s/@service_name@/$app_name$-service/g" app.json'
+                  sh 'sed -i "s/@service_type@/$app_type$/g" app.json'
+                  sh 'sed -i "s/@service_port@/$app_port$/g" app.json'
+                  sh 'sed -i "s/@service_protocol@/TCP/g" app.json'
                }
             }
         }
