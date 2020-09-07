@@ -6,6 +6,24 @@ pipeline {
         string(name: 'cluster_name', description: 'Name for the Kubernetes cluster')
     }
     stages {
+        stage ('Build App') {
+            steps {
+                dir("app") {
+                   sh 'mvn clean install -Dmaven.test.skip'
+                }
+            }
+        }
+        stage ('Containerize App') {
+            steps {
+                dir("app") {
+                   sh 'docker build -f Dockerfile -t @app_name@ .'
+                   sh 'docker tag $app_name $image_name:1'
+                   sh 'ibmcloud login --apikey $api_key -r $region'
+                   sh 'ibmcloud cr login'
+                   sh 'docker push $image_name:1'
+                }
+            }
+        }
         stage('Generate Infra') {
             steps {
                 dir("infra") {
