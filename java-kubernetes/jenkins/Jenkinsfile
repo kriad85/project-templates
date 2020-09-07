@@ -45,7 +45,11 @@ pipeline {
             steps {
                 dir("deploy") {
                    sh 'npm install'
-                   sh 'node src/start.js'
+                }
+                dir("deploy/src") {
+                   sh 'node start.js'
+                }
+                dir("deploy") {
                    sh 'chmod +x deploy.sh'
                    sh './deploy.sh'
                 }
