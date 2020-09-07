@@ -16,7 +16,7 @@ pipeline {
         stage ('Containerize App') {
             steps {
                 dir("app") {
-                   sh 'docker build -f Dockerfile -t @app_name@ .'
+                   sh 'docker build -f Dockerfile -t $app_name .'
                    sh 'docker tag $app_name $image_name:1'
                    sh 'ibmcloud login --apikey $api_key -r $region'
                    sh 'ibmcloud cr login'
