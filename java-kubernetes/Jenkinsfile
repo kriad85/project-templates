@@ -17,6 +17,7 @@ pipeline {
             steps {
                dir("java-kubernetes/app"){
                   sh 'sed -i "s/@app_name@/$app_name/g" pom.xml'
+                  sh 'sed -i "s/@app_name@/$app_name/g" Dockerfile'
                }
                dir("java-kubernetes/app/src/main/resources"){
                   sh 'sed -i "s/@app_port@/$app_port/g" application.properties'
