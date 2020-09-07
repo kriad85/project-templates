@@ -4,7 +4,7 @@ pipeline {
         string(name: 'app_name', description: 'The name of the app to be created')
         string(name: 'app_port', description: 'The port of the app to be exposed')
         string(name: 'replica_number', description: 'The port of the app to be exposed')
-        string(name: 'image_name', description: 'The port of the app to be exposed')
+        string(name: 'image_name', description: 'The name of the image')
         string(name: 'service_type', description: 'The type of the service to be exposed')
         string(name: 'git_email', description: 'The email for the git repo')
         string(name: 'git_user', description: 'The name of the username for the git repo')
