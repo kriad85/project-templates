@@ -1,3 +1,3 @@
-for filename in deployment/output/*; do
+for filename in output/*; do
     kubectl apply -f $filename
 done

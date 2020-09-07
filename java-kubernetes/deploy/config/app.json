@@ -4,7 +4,7 @@
 			"deployment_name":"@deployment_name@",
 			"app_name": "@app_name@",
 			"replica_number": "@replica_number@",
-			"image_name": "@image_name@",
+			"image_name": "de.icr.io/test-ns-kri",
 			"build_number": "@build_number@",
                         "container_port": "@container_port@",
                         "service_name": "@service_name@",

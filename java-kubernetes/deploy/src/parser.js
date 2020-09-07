@@ -4,7 +4,7 @@ const YAML = require('js-yaml');
 module.exports = (configs) => {
    console.log("processing parser...");
    let finalDef = '';
-   const directoryPath = '../deployment/templates';
+   const directoryPath = '../templates';
    fs.readdir(directoryPath, function (err, files) {
           //handling error
           if (err) {
@@ -27,9 +27,9 @@ module.exports = (configs) => {
                         curDef = curDef.replace(re1, configItem[opt][keys[i]]);
                      }
                      console.log(curDef);
-                     fs.writeFile('../deployment/output/'+file+'-'+opt, curDef, function (err) {
+                     fs.writeFile('../output/'+file+'-'+opt, curDef, function (err) {
                           if (err) return console.log(err);
-                          console.log('Generated ../deployment/output/'+file+'-'+opt);
+                          console.log('Generated ../output/'+file+'-'+opt);
                      });
                      
 	          }
