@@ -27,9 +27,9 @@ module.exports = (configs) => {
                         curDef = curDef.replace(re1, configItem[opt][keys[i]]);
                      }
                      console.log(curDef);
-                     fs.writeFile('../output/'+file+'-'+opt, curDef, function (err) {
+                     fs.writeFile('../output/'+file+'-'+opt+'.yml', curDef, function (err) {
                           if (err) return console.log(err);
-                          console.log('Generated ../output/'+file+'-'+opt);
+                          console.log('Generated ../output/'+file+'-'+opt+'.yml');
                      });
                      
 	          }
