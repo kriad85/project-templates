@@ -4,7 +4,7 @@ pipeline {
         string(name: 'app_name', description: 'The name of the app to be created')
         string(name: 'app_port', description: 'The port of the app to be exposed')
         string(name: 'replica_number', description: 'The port of the app to be exposed')
-        string(name: 'image_registry', description: 'The port of the app to be exposed')
+        string(name: 'image_name', description: 'The port of the app to be exposed')
         string(name: 'service_type', description: 'The type of the service to be exposed')
         string(name: 'git_email', description: 'The email for the git repo')
         string(name: 'git_user', description: 'The name of the username for the git repo')
@@ -25,7 +25,7 @@ pipeline {
                   sh 'sed -i "s/@app_name@/$app_name/g" app.json'
                   sh 'sed -i "s/@deployment_name@/$app_name-deployment/g" app.json'
                   sh 'sed -i "s/@replica_number@/$replica_number/g" app.json'
-                  sh 'image_name=$image_registry/$app_name;sed -i "s/@image_name@/$image_name/g" app.json'
+                  sh 'sed -i "s/@image_name@/$image_name/g" app.json'
                   sh 'sed -i "s/@build_number@/1/g" app.json'
                   sh 'sed -i "s/@container_port@/$app_port/g" app.json'
                   sh 'sed -i "s/@service_name@/$app_name$-service/g" app.json'
